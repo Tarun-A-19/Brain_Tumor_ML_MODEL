@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ------------------------------------------------------------------ */
+/* Base                                                               */
+/* ------------------------------------------------------------------ */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    @apply bg-navy-950 text-gray-100 font-sans antialiased;
+    overflow-x: hidden;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy-600 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Components                                                         */
+/* ------------------------------------------------------------------ */
+@layer components {
+  /* Glass card */
+  .glass-card {
+    @apply bg-navy-800/60 backdrop-blur-xl border border-white/5
+           rounded-2xl shadow-lg shadow-black/20;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-accent-light via-blue-400 to-cyan-400
+           bg-clip-text text-transparent;
+  }
+
+  /* Glow button */
+  .btn-glow {
+    @apply relative px-8 py-3 bg-accent text-white font-semibold rounded-xl
+           transition-all duration-300 hover:bg-accent-dark
+           hover:shadow-[0_0_30px_rgba(59,130,246,0.4)]
+           active:scale-[0.97];
+  }
+
+  .btn-glow::before {
+    content: "";
+    @apply absolute inset-0 rounded-xl bg-accent/20 blur-xl
+           opacity-0 transition-opacity duration-300;
+  }
+  .btn-glow:hover::before {
+    @apply opacity-100;
+  }
+
+  /* Outline button */
+  .btn-outline {
+    @apply px-8 py-3 border border-accent/40 text-accent font-semibold rounded-xl
+           transition-all duration-300 hover:bg-accent/10
+           hover:border-accent active:scale-[0.97];
+  }
+
+  /* Upload drop zone */
+  .drop-zone {
+    @apply relative border-2 border-dashed border-navy-600 rounded-2xl
+           p-12 text-center cursor-pointer transition-all duration-300
+           hover:border-accent/60 hover:bg-accent/5;
+  }
+  .drop-zone.active {
+    @apply border-accent bg-accent/10 scale-[1.01];
+  }
+
+  /* Stat card */
+  .stat-card {
+    @apply glass-card p-6 text-center transition-transform duration-300
+           hover:scale-105 hover:border-accent/20;
+  }
+
+  /* Risk badges */
+  .risk-high {
+    @apply bg-danger/20 text-danger border border-danger/30;
+  }
+  .risk-medium {
+    @apply bg-warning/20 text-warning border border-warning/30;
+  }
+  .risk-none {
+    @apply bg-success/20 text-success border border-success/30;
+  }
+  .risk-uncertain {
+    @apply bg-gray-500/20 text-gray-400 border border-gray-500/30;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Utilities                                                          */
+/* ------------------------------------------------------------------ */
+@layer utilities {
+  .delay-100 { animation-delay: 100ms; }
+  .delay-200 { animation-delay: 200ms; }
+  .delay-300 { animation-delay: 300ms; }
+  .delay-400 { animation-delay: 400ms; }
+  .delay-500 { animation-delay: 500ms; }
+  .delay-600 { animation-delay: 600ms; }
+  .delay-700 { animation-delay: 700ms; }
+  .delay-800 { animation-delay: 800ms; }
+}
+
+/* ------------------------------------------------------------------ */
+/* Scan animation                                                     */
+/* ------------------------------------------------------------------ */
+.scan-container {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scan-ring {
+  position: absolute;
+  border: 2px solid rgba(59, 130, 246, 0.4);
+  border-radius: 50%;
+  width: 100%;
+  height: 100%;
+}
+
+.scan-ring:nth-child(1) {
+  animation: pulseRing 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+}
+.scan-ring:nth-child(2) {
+  animation: pulseRing 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s infinite;
+}
+.scan-ring:nth-child(3) {
+  animation: pulseRing 1.5s cubic-bezier(0.215, 0.61, 0.355, 1) 0.8s infinite;
+}
+
+@keyframes pulseRing {
+  0% {
+    transform: scale(0.5);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.8);
+    opacity: 0;
+  }
+}
